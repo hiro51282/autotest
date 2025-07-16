@@ -1,5 +1,6 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render } from '@testing-library/react';
+import { screen, fireEvent } from '@testing-library/dom';
 import { CategoryFilter } from '../components/CategoryFilter';
 
 describe('CategoryFilter', () => {
@@ -75,10 +76,10 @@ describe('CategoryFilter', () => {
     );
 
     const activeButtons = screen.getAllByText('仕事');
-    const selectedButton = activeButtons.find(btn => btn.closest('button')?.classList.contains('active'));
+    const selectedButton = activeButtons.find((btn: HTMLElement) => btn.closest('button')?.classList.contains('active'));
     expect(selectedButton).toBeInTheDocument();
 
-    const otherButtons = screen.getAllByRole('button').filter(btn => 
+    const otherButtons = screen.getAllByRole('button').filter((btn: HTMLElement) => 
       btn.textContent !== '仕事' && !btn.classList.contains('active')
     );
     expect(otherButtons.length).toBeGreaterThan(0);
